@@ -49,7 +49,7 @@ const initSigns = () => {
         }
     })
 
-    const scheduledFunctionAfternoon = CronJob.schedule('43 14 * * 1-5', async () => {
+    const scheduledFunctionAfternoon = CronJob.schedule('47 14 * * 1-5', async () => {
         console.log("started afternoon sign")
         const maintenant = new Date();
         if (!estWeekend(maintenant)) {
@@ -58,7 +58,7 @@ const initSigns = () => {
     })
 
     scheduledFunctionMorning.start()
-    scheduledFunctionAfternoon
+    scheduledFunctionAfternoon.start()
 
 }
 
