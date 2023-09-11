@@ -36,14 +36,14 @@ async function launchSignature() {
 
 }
 
-cron.schedule('30 9 * * 1-5', async () => {
+cron.schedule('10 9 * * 1-5', async () => {
     const maintenant = new Date();
     if (!estWeekend(maintenant)) {
         launchSignature()
     }
 })
 
-cron.schedule('30 14 * * 1-5', async () => {
+cron.schedule('10 14 * * 1-5', async () => {
     const maintenant = new Date();
     if (!estWeekend(maintenant)) {
         launchSignature()
