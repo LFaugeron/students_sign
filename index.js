@@ -37,6 +37,7 @@ async function launchSignature() {
 }
 
 cron.schedule('10 9 * * 1-5', async () => {
+    console.log("started morning sign")
     const maintenant = new Date();
     if (!estWeekend(maintenant)) {
         launchSignature()
@@ -44,6 +45,7 @@ cron.schedule('10 9 * * 1-5', async () => {
 })
 
 cron.schedule('10 14 * * 1-5', async () => {
+    console.log("started afternoon sign")
     const maintenant = new Date();
     if (!estWeekend(maintenant)) {
         launchSignature()
