@@ -9,7 +9,7 @@ function estWeekend(date) {
 
 async function launchSignature() {
 
-    const browser = await puppeteer.launch({headless : true})
+    const browser = await puppeteer.launch({headless : "new"})
     const page = await browser.newPage()
 
     await page.goto("https://odyssey.wildcodeschool.com")
