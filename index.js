@@ -1,6 +1,9 @@
 const puppeteer = require("puppeteer")
-const cron = require("node-cron")
+const CronJob = require("node-cron")
+const express = require("express")
 require('dotenv').config()
+
+const app = express()
 
 function estWeekend(date) {
     return date.getDay() === 0 || date.getDay() === 6;
@@ -36,18 +39,31 @@ async function launchSignature() {
 
 }
 
-cron.schedule('10 9 * * 1-5', async () => {
-    console.log("started morning sign")
-    const maintenant = new Date();
-    if (!estWeekend(maintenant)) {
-        launchSignature()
-    }
-})
+const initSigns = () => {
 
-cron.schedule('10 14 * * 1-5', async () => {
-    console.log("started afternoon sign")
-    const maintenant = new Date();
-    if (!estWeekend(maintenant)) {
-        launchSignature()
-    }
+    const scheduledFunctionMorning = CronJob.schedule('10 9 * * 1-5', async () => {
+        console.log("started morning sign")
+        const maintenant = new Date();
+        if (!estWeekend(maintenant)) {
+            launchSignature()
+        }
+    })
+
+    const scheduledFunctionAfternoon = CronJob.schedule('43 14 * * 1-5', async () => {
+        console.log("started afternoon sign")
+        const maintenant = new Date();
+        if (!estWeekend(maintenant)) {
+            launchSignature()
+        }
+    })
+
+    scheduledFunctionMorning.start()
+    scheduledFunctionAfternoon
+
+}
+
+initSigns()
+
+app.listen(process.env.PORT, () => {
+    console.log("express server launched")
 })
